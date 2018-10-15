@@ -1,0 +1,64 @@
+﻿@model DI.Models.LoginModal
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Industries</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"  />
+    <meta content="First time login " name="description" />
+    <meta content="" name="author" />
+    
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/Content/cssFirstTimelogin")
+    <link rel="shortcut icon" href="favicon.ico" /> 
+</head>
+<!-- END HEAD -->
+<body class="">
+    <div class="page-lock">
+        <div class="page-logo">
+            <a class="brand" href="index.html">
+                <img src="~/Content/assets/pages/img/logo-big.png" alt="logo" />
+            </a>
+        </div>
+        <div class="page-body">
+            <img class="page-lock-img" src="~/Content/assets/pages/media/profile/profile.jpg" alt="">
+            <div class="page-lock-info">
+                <h1>@UserSession.LoggedInUserName.ToString()</h1>
+                <span class="email"> bob@keenthemes.com </span>
+                <span class="locked"> Locked </span>
+                <form class="form-inline" action="index.html">
+                    <div class="input-group input-medium">
+                        <input type="text" class="form-control" placeholder="Password">
+                        <input type="text" class="form-control" placeholder="Password">
+                        <input type="text" class="form-control" placeholder="Password">
+                        
+                    </div>
+                    <!-- /input-group -->
+                    <div class="relogin">
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn green icn-only">
+                                <i class="m-icon-swapright m-icon-white"></i>
+                            </button>
+                        </span>
+
+
+                        <a href="login.html"> Not Bob Nilson ? </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-footer-custom"> 2018 &copy; NIC. Powered by NIC Lucknow. </div>
+    </div>
+    
+    @Scripts.Render("~/bundles/bootstrapFirstTimelogin")
+</body>
+</html>

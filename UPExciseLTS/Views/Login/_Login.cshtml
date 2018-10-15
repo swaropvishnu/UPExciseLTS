@@ -1,0 +1,265 @@
+﻿@model UPExciseLTS.Models.BOLogin
+@{
+    Layout = null;
+    Session["redirectto"] = "User";
+}
+
+    @*<link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css1/fontastic.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="~/css1/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="~/css1/custom.css">*@
+
+    <!-- END-->
+    <link rel="shortcut icon" href="favicon.png">
+
+
+    <script src="~/js/md5.js"></script>
+    <style>
+        .wid {
+            width: 100%;
+        }
+    </style>
+    
+    <script>
+
+        function HashPwdwithSalt() {
+            debugger
+
+            // var salt = $('#hdnsalt').val();
+
+            var salt = '@Session["salt"]';
+
+            if ($('#txtUserName').val() == "" || $('#txtUserName').val() == undefined) {
+                alert("Please fill UserName");
+                return false;
+            }
+            else if ($('#txtPassword').val() == "" || $('#txtPassword').val() == undefined) {
+                alert("Please fill Password");
+                return false;
+            }
+            else if ($('#txtforcapture').val() == "" || $('#txtforcapture').val() == undefined) {
+                alert("Please fill Captcha");
+                return false;
+            }
+            else if ($('#txtPassword').val() != "" || $('#txtPassword').val() == undefined) {
+
+                $('#txtPassword').val(hex_md5($('#txtPassword').val()));//Paswword MD5
+
+                //alert('Your Hash code is ' + $('#txtPassword').val() + ' and Your Salt is ' + salt + '');
+
+
+                $('#txtPassword').val(hex_md5($('#txtPassword').val() + salt));   //MD5(MDGPassword+Salt)
+
+            }
+
+            console.log($("#login-form").serialize())
+            $.ajax({
+                url: "/Login/Login",
+                type: "POST",
+                data: $("#login-form").serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    debugger;
+                    console.log(result);
+                    if (result.url.length > 0) {
+                        location.href = window.location.origin + result.url;
+                    }
+                    else if (result.msg.length > 0) {
+                        alert(result.msg);
+                    }
+
+                   
+                },
+                error: function (result) {
+                    alert("error occuring");
+                }
+            });
+
+
+        }
+
+
+
+
+         @*function HashPwdwithSalt() {
+            var salt = '@Session["salt"]';
+
+            if (document.getElementById("txtUserName").value == "") {
+                alert("Please fill UserName");
+                return false;
+            }
+            else if (document.getElementById("txtPassword").value == "") {
+                alert("Please fill Password");
+                return false;
+            }
+            else if (document.getElementById("txtforcapture").value == "") {
+                alert("Please fill Captcha");
+                return false;
+            }
+            else if (document.getElementById("txtPassword").value != "") {
+
+                document.getElementById("txtPassword").value = sha256(document.getElementById("txtPassword").value);
+
+                document.getElementById("txtPassword").value =
+                  sha256(document.getElementById("txtPassword").value + salt);
+
+            }
+            // return true;
+        }*@
+
+
+
+
+
+    </script>
+    @{
+
+
+
+        if (@Session["salt"] != null)
+        {
+            <script>
+
+            $('#hdnsalt').val('@Session["salt"]');
+
+            </script>
+        }
+    }
+
+
+    <div class="page login-page">
+        <div class="container d-flex align-items-center">
+            <div class="form-holder has-shadow" style="height: 70%">
+                <div class="row">
+                    <!-- Logo & Information Panel-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="info d-flex align-items-center">
+                            <div class="content">
+                                <div class="logo">
+
+                                    <img class="national_emblem" src="~/Image/img/uttar_pradesh_government.png" width="90px;" alt="national emblem">
+
+                                    <div style="margin-left: 111px; margin-top: -62px;">
+                                        <span style="font-size: 26px; text-decoration: underline;"><strong lang="hi">आबकारी विभाग, उत्तरप्रदेश</strong></span>
+                                    </div>
+
+                                </div>
+                                <br />
+                                <br />
+                                <h2>ऑनलाइन ई-लाटरी पोर्टल में सुविधायें-</h2>
+                                <br />
+
+                                <p><i class="fa fa-hand-o-right"></i>पंजीकृत आवेदनकर्ता लॉग इन हेतु अपना पंजीकरण संख्या एवं पासवर्ड का प्रयोग करें|</p>
+                                <p><i class="fa fa-hand-o-right"></i>ऑनलाइन देशी मदिरा/विदेशी मदिरा/मॉडल शॉप एवं बियर की फुटकर दुकानों हेतु आवेदन</p>
+                                <p><i class="fa fa-hand-o-right"></i>ऑनलाइन आवेदन शुल्क जमा करें|</p>
+                                <p><i class="fa fa-hand-o-right"></i>आवेदन की स्थिति देखे|</p>
+                                <p><i class="fa fa-hand-o-right"></i>ऑनलाइन दुकान आवंटन(ई-लाटरी)</p>
+                                <p><i class="fa fa-hand-o-right"></i>आवेदन सम्बंधित सूचनाये एस.एम.एस/ईमेल पर प्राप्त करें|</p>
+                                <br />
+                                <br />
+                                @*<center>  <a class="btn btn-dark" href="../SignUp/DoSignUp"><i class="fa fa-paper-plane-o"></i>  &nbsp; पंजीकरण हेतु क्लिक करें |</a></center>*@
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form Panel    -->
+                    <div class="col-md-6 col-sm-12 bg-white">
+                        <div class="form d-flex align-items-center">
+                            <div class="content">
+                                <form id="login-form" method="post">
+                                    <div class="form-group">
+                                        @{
+                                            if (Session["redirectto"] != null && Session["redirectto"].ToString() == "User")
+                                            {
+                                                // @ViewBag.UserLogin=null;
+                                                <span style="font-weight: bold">
+                                                    पंजीकृत आवेदक @Html.RadioButtonFor(Model => Model.RoleId, "6", new { @checked = "checked" })
+                                                </span>
+                                            }
+                                            if (Session["redirectto"] != null && Session["redirectto"].ToString() == "Office")
+                                            {
+                                                <span style="font-weight: bold">
+                                                    कार्यालय यूजर @Html.RadioButtonFor(Model => Model.RoleId, "2", new { @checked = "checked" })
+                                                </span>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="login-username" class="label-custom" id="lbltxt1">User Name / उपयोगकर्ता नाम</label>
+                                        @*  <input id="login-username" type="text" name="loginUsername" required="">*@
+                                        @Html.TextBoxFor(Model => Model.UserName, "Text", new { @id = "txtUserName", @required = "required", @class = "wid" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="login-password" class="label-custom">Password / पासवर्ड</label>
+                                        @Html.PasswordFor(Model => Model.Password, new { @id = "txtPassword", @required = "required", @class = "wid" })
+                                    </div>
+                                    <div class="form-group ">
+
+                                        <img src="../Captcha/GetCaptchaImage" title="Captcha" style="height: 40px; width: 34%;" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">Refresh</a>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="login-Captcha" class="label-custom" id="lbltxt">Captcha</label>
+                                        @Html.TextBoxFor(Model => Model.clientCaptcha, new { @id = "txtforcapture", @required = "required", @class = "wid" })
+
+                                    </div>
+                                    @* <a id="login" class="btn btn-primary">Login</a>*@
+                                    <center>
+                                        <input type="submit" id="login" value="login" class="btn btn-primary" onclick="HashPwdwithSalt();" />
+                                    </center>
+                                    <a id="login1" class="btn btn-link" href="../Login/ForgotRegistration">Forget Password/Forget Registration</a>
+                                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyrights text-center">
+            <p>Powered by <a href="www.nic.in" class="external">NIC</a></p>
+
+        </div>
+    </div>
+
+
+
+    @*<script src="~/js/jquery-3.2.1.js"></script>
+    <script src="/vendor/popper.js/umd/popper.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+    <script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/js1/front.js"></script>*@
+
+
+    <script>
+
+        function changeText(txt) {
+            debugger
+            if (txt == "User name") {
+
+                $('#login').attr('href', '../Home/AllApplications');
+            }
+
+            if (txt == "Registration") {
+
+                $('#login').attr('href', '../User/UserDashBoard');
+            }
+
+            $('#lbltxt').text(txt);
+        }
+
+        function closeModalPopup() {
+            $("#ModalContainer").modal('hide');
+        }
+       
+
+
+    </script>
+

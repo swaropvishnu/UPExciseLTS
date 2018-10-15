@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPExciseLTS", "UPExciseLTS\UPExciseLTS.csproj", "{A2CC13C9-54C7-480A-916A-D58F05551A7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPExciseLTS.Tests", "UPExciseLTS.Tests\UPExciseLTS.Tests.csproj", "{9E2CAC77-072F-42C6-A6EA-D628013DFD98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2CC13C9-54C7-480A-916A-D58F05551A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2CC13C9-54C7-480A-916A-D58F05551A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2CC13C9-54C7-480A-916A-D58F05551A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2CC13C9-54C7-480A-916A-D58F05551A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E2CAC77-072F-42C6-A6EA-D628013DFD98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E2CAC77-072F-42C6-A6EA-D628013DFD98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E2CAC77-072F-42C6-A6EA-D628013DFD98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E2CAC77-072F-42C6-A6EA-D628013DFD98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
