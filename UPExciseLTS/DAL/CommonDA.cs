@@ -46,12 +46,12 @@ namespace UPExciseLTS.DAL
 
 
                 }
-                return fm;
+               
 
             }
             catch
             {
-                throw;
+                fm = new LoginModal();
             }
             finally
             {
@@ -59,6 +59,7 @@ namespace UPExciseLTS.DAL
                 con.Close();
                 con.Dispose();
             }
+            return fm;
         }
         public string filter_bad_chars_rep(string s)
         {
@@ -145,7 +146,7 @@ namespace UPExciseLTS.DAL
             catch
             {
 
-                throw;
+                ds = null;
 
             }
             finally
@@ -2455,6 +2456,7 @@ namespace UPExciseLTS.DAL
         //    return dt;
         //}
         #endregion
+
         //public DataSet GetPramarPatar(long applicant_code)
         //{
         //    DataSet ds = new DataSet();

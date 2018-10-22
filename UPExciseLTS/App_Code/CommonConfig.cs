@@ -11,6 +11,11 @@ namespace UPExciseLTS
         {
             string Comm = System.Configuration.ConfigurationManager.ConnectionStrings["constr"].ToString();
             return Comm;
-        }        
+        }
+        public static string Conndb2()
+        {
+            string Comm = System.Configuration.ConfigurationManager.ConnectionStrings["conStrbe_unnao"].ToString();
+            return Comm;
+        }
     }
 }

@@ -127,16 +127,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Data\CMODataEntryBLL.cs" />
-    <Compile Include="App_Data\CommonConfig.cs" />
-    <Compile Include="App_Data\Crypto.cs" />
-    <Compile Include="App_Data\DataContext.cs" />
-    <Compile Include="App_Data\RandomImage.cs" />
-    <Compile Include="App_Data\RealDataEmulator.cs" />
-    <Compile Include="App_Data\RegionInfo.cs" />
-    <Compile Include="App_Data\SecurityImp.cs" />
-    <Compile Include="App_Data\SMS.cs" />
-    <Compile Include="App_Data\UserDtl.cs" />
+    <Compile Include="App_Code\CMODataEntryBLL.cs" />
+    <Compile Include="App_Code\CommonConfig.cs" />
+    <Compile Include="App_Code\Crypto.cs" />
+    <Compile Include="App_Code\DataContext.cs" />
+    <Compile Include="App_Code\RandomImage.cs" />
+    <Compile Include="App_Code\RealDataEmulator.cs" />
+    <Compile Include="App_Code\RegionInfo.cs" />
+    <Content Include="App_Code\SecurityImp.cs" />
+    <Compile Include="App_Code\SMS.cs" />
+    <Compile Include="App_Code\UserDtl.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -145,6 +145,7 @@
     <Compile Include="Controllers\CaptchaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MasterFormsController.cs" />
     <Compile Include="DAL\CommonDA.cs" />
     <Compile Include="Filters\SessionExpireFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -159,6 +160,7 @@
     <Compile Include="Models\CaptchaImageResult.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\LoginModal.cs" />
+    <Compile Include="Models\MasterForms.cs" />
     <Compile Include="Models\UserAuthorization.cs" />
     <Compile Include="Models\UserManager.cs" />
     <Compile Include="Models\UserSession.cs" />
@@ -4195,7 +4197,9 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sha256.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -4219,8 +4223,14 @@
     <Content Include="Views\Login\ResetPassword.cshtml" />
     <Content Include="Views\Login\FirstTimeLogin.cshtml" />
     <Content Include="Views\Login\ProfileUpdate.cshtml" />
+    <Content Include="Views\MasterForms\Index.cshtml" />
+    <Content Include="Views\MasterForms\BrandMaster.cshtml" />
+    <Content Include="Views\MasterForms\BottelingPlanList.cshtml" />
+    <Content Include="Views\MasterForms\BottelingPlan.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -4238,16 +4248,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52852/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

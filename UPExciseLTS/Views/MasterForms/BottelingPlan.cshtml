@@ -1,0 +1,113 @@
+﻿@model UPExciseLTS.Models.BottelingPlan
+
+@{
+    ViewBag.Title = "Botteling Plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script type="text/javascript">
+    var specialKeys = new Array();
+    specialKeys.push(47); // for Forward Slash(/)
+    specialKeys.push(8); //Backspace
+    specialKeys.push(9); // Tab
+    specialKeys.push(46); // for .
+    specialKeys.push(37); // for left Arrow
+    //  specialKeys.push(39); // for Right Arrow
+    function IsNumeric(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1); // For Decimal To All Number
+        if (ret == false) {
+            alert("Only numaric value allowed.");
+        }
+        return ret;
+    }
+</script>
+@using (Html.BeginForm("BrandMaster", "MasterForms", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="page-content-inner">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="portlet box purple">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>Botteling Plan
+                        </div>
+                    </div>
+                    <div class="portlet-body form" style="background-color: #f5f5f5">
+                        <div class="form-body">
+                             <div class="form-group col-md-4">
+                                <label class="control-label">Date</label>
+                                  @Html.TextBoxFor(m => m.DateOfPlan, new { @id = "txtDateofPlan", @class = "form-control" , @required = "required",@Value=""  })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Brand</label>
+                                @Html.DropDownListFor(m => m.BrandId, (IEnumerable<SelectListItem>)ViewBag.Brand, new { @id = "ddlBrand", @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">For Mapped/ Unmapped Data</label>
+                                @Html.DropDownList("MapUnMaped", new List<SelectListItem> { new SelectListItem { Text = "Mapped", Value = "Mapped" }, new SelectListItem { Text = "UnMapped", Value = "UnMapped" } }, new { @id = "ddlMaped", @class = "form-control" })
+                            </div>
+                             <div class="form-group col-md-4">
+                                <label class="control-label">Import</label>
+                                @Html.DropDownList("Import", new List<SelectListItem> { new SelectListItem { Text = "For UP", Value = "UP" }, new SelectListItem { Text = "For Outside UP", Value = "Outside" } }, new { @id = "ddlImport", @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">No of Case</label>
+                                  @Html.TextBoxFor(m => m.NumberOfCases, new { @id = "txtNoOfCase", @class = "form-control" , @required = "required"  })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Bottels in case</label>
+                                  @Html.TextBoxFor(m => m.QunatityInCaseExport, new { @id = "txtBottleInCase", @class = "form-control" , @required = "required"  })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">BulkLiter</label>
+                                  @Html.DisplayFor(m => m.BulkLiter, new { @id = "lblBulkLitre", @class = "form-control" , @required = "required"  })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Alcoholic Liter</label>
+                                  @Html.DisplayFor(m => m.AlcoholicLiter, new { @id = "lblAlcoholicLiter", @class = "form-control" , @required = "required"  })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Total Unit</label>
+                                  @Html.DisplayFor(m => m.TotalUnitQuantity, new { @id = "lblTotalUnitQuantity", @class = "form-control" , @required = "required"  })
+                            </div>
+                        </div>
+                         <div class="clearfix"></div>
+                        <div class="form-actions right">
+                            <button type="submit" class="btn green" onclick="myfunction()">Submit</button>
+                            <button type="button" class="btn default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                             
+}
+
+@*<script type="text/javascript">*@
+    // Copy from Add Shop --> Add Shop
+    //$(document).ready(function () {
+    //    $('#ddlBrand').change(function () {
+    //        var BrandId = $('$ddlBrand').find(":selected").val();
+    //        if (BrandId !="-1") {
+    //            BrandChange(BrandId);
+    //        }
+    //    })
+    //});
+    //function BrandChange(brandId) {
+    //    $.ajax({
+    //        url: '/MasterForms/GetBrand',
+    //        data: { 'BrandId': brandId },
+    //        datatype: "json",
+    //        type: "GET",
+    //        async: true,
+    //        success: function (data) {
+
+    //        }
+    //    });
+    //}
+@*</script>*@
+

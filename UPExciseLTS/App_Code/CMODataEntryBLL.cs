@@ -77,7 +77,37 @@ namespace UPExciseLTS
             {
                 sdr = SqlHelper.ExecuteReader(CommonConfig.Conn(), CommandType.StoredProcedure, ProcName);
             }
-            distNames.Insert(0, new SelectListItem { Text = "--चयन करे--", Value = "-1" });
+            distNames.Insert(0, new SelectListItem { Text = "--Select--", Value = "-1" });
+            while (sdr.Read())
+            {
+                distNames.Add(new SelectListItem
+                {
+
+                    Text = sdr["ValueText"].ToString(),
+                    Value = sdr["ValueId"].ToString()
+                });
+            }
+            sdr.Close();
+        }
+        public static void bindDropDownHnGrid_db2(string ProcName, List<SelectListItem> distNames, string parm1, string parm2, string parm3)
+        {
+            DataSet ds = new DataSet();
+            SqlDataReader sdr;
+            if (parm1.Length > 0 && parm1 != "")
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@Parm1", parm1));
+                if (parm2.Length > 0 && parm2 != "")
+                    parameters.Add(new SqlParameter("@Parm2", parm2));
+                if (parm3.Length > 0 && parm3 != "")
+                    parameters.Add(new SqlParameter("@Parm3", parm3));
+                sdr = SqlHelper.ExecuteReader(CommonConfig.Conndb2(), CommandType.StoredProcedure, ProcName, parameters.ToArray());
+            }
+            else
+            {
+                sdr = SqlHelper.ExecuteReader(CommonConfig.Conndb2(), CommandType.StoredProcedure, ProcName);
+            }
+            distNames.Insert(0, new SelectListItem { Text = "--Select--", Value = "-1" });
             while (sdr.Read())
             {
                 distNames.Add(new SelectListItem

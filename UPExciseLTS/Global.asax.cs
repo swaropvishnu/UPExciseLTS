@@ -28,64 +28,68 @@ namespace UPExciseLTS
 
         void Application_Error(object sender, EventArgs e)
         {
-            //Code that runs when an unhandled error occurs
-            //Exception ex = default(Exception);
-
-            //ex = Server.GetLastError().InnerException;
-            //if (ex != null)
-            //{ 
-            //    ex = Server.GetLastError().InnerException;
-            //    CMODataEntryBLL.InsertErrLog(Request.Url.ToString(), ex.ToString());
-            //    //HttpContext.Current.Response.Redirect("~/ErrorPageS.aspx",false);
-            //    //HttpContext.Current.Response.Redirect("~/ErrorPageS.aspx", false);
-            //}
-            //Server.ClearError();
-            HttpContext httpContext = HttpContext.Current;
-            if (httpContext != null)
+            try
             {
-                RequestContext requestContext = ((MvcHandler)httpContext.CurrentHandler).RequestContext;
-                /* When the request is ajax the system can automatically handle a mistake with a JSON response. 
-                   Then overwrites the default response */
-                if (requestContext.HttpContext.Request.IsAjaxRequest())
-                {
-                    httpContext.Response.Clear();
-                    string controllerName = requestContext.RouteData.GetRequiredString("controller");
-                    IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
-                    IController controller = factory.CreateController(requestContext, controllerName);
-                    ControllerContext controllerContext = new ControllerContext(requestContext, (ControllerBase)controller);
+                //Code that runs when an unhandled error occurs
+                //Exception ex = default(Exception);
 
-                    JsonResult jsonResult = new JsonResult
+                //ex = Server.GetLastError().InnerException;
+                //if (ex != null)
+                //{ 
+                //    ex = Server.GetLastError().InnerException;
+                //    CMODataEntryBLL.InsertErrLog(Request.Url.ToString(), ex.ToString());
+                //    //HttpContext.Current.Response.Redirect("~/ErrorPageS.aspx",false);
+                //    //HttpContext.Current.Response.Redirect("~/ErrorPageS.aspx", false);
+                //}
+                //Server.ClearError();
+                HttpContext httpContext = HttpContext.Current;
+                if (httpContext != null)
+                {
+                    RequestContext requestContext = ((MvcHandler)httpContext.CurrentHandler).RequestContext;
+                    /* When the request is ajax the system can automatically handle a mistake with a JSON response. 
+                       Then overwrites the default response */
+                    if (requestContext.HttpContext.Request.IsAjaxRequest())
                     {
-                        Data = new { success = false, serverError = "500" },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-                    jsonResult.ExecuteResult(controllerContext);
-                    httpContext.Response.End();
-                }
-                else
-                {
-                    //Code that runs when an unhandled error occurs
-                    //Exception ex = default(Exception);
+                        httpContext.Response.Clear();
+                        string controllerName = requestContext.RouteData.GetRequiredString("controller");
+                        IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
+                        IController controller = factory.CreateController(requestContext, controllerName);
+                        ControllerContext controllerContext = new ControllerContext(requestContext, (ControllerBase)controller);
 
-                    //ex = Server.GetLastError().InnerException;
-                    //if (ex != null)
-                    //{
-                    string ex = httpContext.Error.Message;
-                    CMODataEntryBLL.InsertErrLog(Request.Url.ToString(), ex);
-                    //}
-                    Response.Clear();
-                    Server.ClearError();
+                        JsonResult jsonResult = new JsonResult
+                        {
+                            Data = new { success = false, serverError = "500" },
+                            JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                        };
+                        jsonResult.ExecuteResult(controllerContext);
+                        httpContext.Response.End();
+                    }
+                    else
+                    {
+                        //Code that runs when an unhandled error occurs
+                        //Exception ex = default(Exception);
 
-                    var routeData = new RouteData();
-                    routeData.Values["controller"] = "Login";
-                    routeData.Values["action"] = "Error";
-                    Response.StatusCode = 500;
+                        //ex = Server.GetLastError().InnerException;
+                        //if (ex != null)
+                        //{
+                        string ex = httpContext.Error.Message;
+                        CMODataEntryBLL.InsertErrLog(Request.Url.ToString(), ex);
+                        //}
+                        Response.Clear();
+                        Server.ClearError();
 
-                    IController controller = new LoginController();
-                    var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
-                    controller.Execute(rc);
+                        var routeData = new RouteData();
+                        routeData.Values["controller"] = "Login";
+                        routeData.Values["action"] = "Error";
+                        Response.StatusCode = 500;
+
+                        IController controller = new LoginController();
+                        var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
+                        controller.Execute(rc);
+                    }
                 }
             }
+            catch { }
         }
 
         protected void Session_Start(Object sender, EventArgs e)
